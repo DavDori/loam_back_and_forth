@@ -247,7 +247,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudIn2)
     *laserCloudExtreCur += *laserCloudLessExtreCur;
     pcl::toROSMsg(*laserCloudExtreCur + *imuTrans, laserCloudLast2);
     laserCloudLast2.header.stamp = ros::Time().fromSec(timeScanLast);
-    laserCloudLast2.header.frame_id = "/camera";
+    laserCloudLast2.header.frame_id = "camera";
     laserCloudExtreCur->clear();
     laserCloudLessExtreCur->clear();
     imuTrans->clear();
@@ -607,7 +607,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudIn2)
     sensor_msgs::PointCloud2 laserCloudExtreCur2;
     pcl::toROSMsg(*laserCloudExtreCur + *imuTrans, laserCloudExtreCur2);
     laserCloudExtreCur2.header.stamp = ros::Time().fromSec(timeScanCur);
-    laserCloudExtreCur2.header.frame_id = "/camera";
+    laserCloudExtreCur2.header.frame_id = "camera";
     pubLaserCloudExtreCurPointer->publish(laserCloudExtreCur2);
     imuTrans->clear();
 

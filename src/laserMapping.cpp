@@ -23,8 +23,8 @@
 #include <pcl/kdtree/kdtree_flann.h>
 
 const double PI = 3.1415926;
-const double rad2deg = 180 / PI;
-const double deg2rad = PI / 180;
+const double rad2deg = 180.0 / PI;
+const double deg2rad = PI / 180.0;
 
 double timeLaserCloudLast;
 double timeLaserOdometry;
@@ -244,13 +244,13 @@ int main(int argc, char** argv)
 
   ros::Publisher pubOdomBefMapped = nh.advertise<nav_msgs::Odometry> ("/bef_mapped_to_init_2", 5);
   nav_msgs::Odometry odomBefMapped;
-  odomBefMapped.header.frame_id = "/camera_init_2";
-  odomBefMapped.child_frame_id = "/bef_mapped";
+  odomBefMapped.header.frame_id = "camera_init_2";
+  odomBefMapped.child_frame_id = "bef_mapped";
 
   ros::Publisher pubOdomAftMapped = nh.advertise<nav_msgs::Odometry> ("/aft_mapped_to_init_2", 5);
   nav_msgs::Odometry odomAftMapped;
-  odomAftMapped.header.frame_id = "/camera_init_2";
-  odomAftMapped.child_frame_id = "/aft_mapped";
+  odomAftMapped.header.frame_id = "camera_init_2";
+  odomAftMapped.child_frame_id = "aft_mapped";
 
   std::vector<int> pointSearchInd;
   std::vector<float> pointSearchSqDis;
@@ -728,7 +728,7 @@ int main(int argc, char** argv)
       sensor_msgs::PointCloud2 laserCloudSurround2;
       pcl::toROSMsg(*laserCloudSurround, laserCloudSurround2);
       laserCloudSurround2.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-      laserCloudSurround2.header.frame_id = "/camera_init_2";
+      laserCloudSurround2.header.frame_id = "camera_init_2";
       pubLaserCloudSurround.publish(laserCloudSurround2);
 
       geometry_msgs::Quaternion geoQuat = tf::createQuaternionMsgFromRollPitchYaw
@@ -760,22 +760,22 @@ int main(int argc, char** argv)
       /*sensor_msgs::PointCloud2 pc12;
       pcl::toROSMsg(*laserCloudCornerFromMap, pc12);
       pc12.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-      pc12.header.frame_id = "/camera_init_2";
+      pc12.header.frame_id = "camera_init_2";
       pub1.publish(pc12);
       sensor_msgs::PointCloud2 pc22;
       pcl::toROSMsg(*laserCloudSel, pc22);
       pc22.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-      pc22.header.frame_id = "/camera_init_2";
+      pc22.header.frame_id = "camera_init_2";
       pub2.publish(pc22);
       sensor_msgs::PointCloud2 pc32;
       pcl::toROSMsg(*laserCloudCorr, pc32);
       pc32.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-      pc32.header.frame_id = "/camera_init_2";
+      pc32.header.frame_id = "camera_init_2";
       pub3.publish(pc32);
       sensor_msgs::PointCloud2 pc42;
       pcl::toROSMsg(*laserCloudProj, pc42);
       pc42.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-      pc42.header.frame_id = "/camera_init_2";
+      pc42.header.frame_id = "camera_init_2";
       pub4.publish(pc42);*/
     }
 

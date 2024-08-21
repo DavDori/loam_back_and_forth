@@ -411,8 +411,8 @@ int main(int argc, char** argv)
 
   ros::Publisher pubLaserOdometry = nh.advertise<nav_msgs::Odometry> ("/cam_to_init", 5);
   nav_msgs::Odometry laserOdometry;
-  laserOdometry.header.frame_id = "/camera_init";
-  laserOdometry.child_frame_id = "/camera";
+  laserOdometry.header.frame_id = "camera_init";
+  laserOdometry.child_frame_id = "camera";
 
   tf::TransformBroadcaster tfBroadcaster;
   tf::StampedTransform laserOdometryTrans;
@@ -962,7 +962,7 @@ int main(int argc, char** argv)
         sensor_msgs::PointCloud2 laserCloudLast2;
         pcl::toROSMsg(*laserCloudCornerLast + *laserCloudSurfLast, laserCloudLast2);
         laserCloudLast2.header.stamp = ros::Time().fromSec(timeLaserCloudLast);
-        laserCloudLast2.header.frame_id = "/camera";
+        laserCloudLast2.header.frame_id = "camera";
         pubLaserCloudLast2.publish(laserCloudLast2);
 
       } else {
