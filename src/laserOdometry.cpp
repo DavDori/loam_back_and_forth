@@ -371,12 +371,18 @@ void laserCloudLastHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudLas
     pcl::KdTreeFLANN<pcl::PointXYZHSV>::Ptr kdtreePointer = kdtreeCornerLLast;
     kdtreeCornerLLast = kdtreeCornerLast;
     kdtreeCornerLast = kdtreePointer;
-    kdtreeCornerLast->setInputCloud(laserCloudCornerLast);
+    if(!laserCloudCornerLast->empty())
+    {
+      kdtreeCornerLast->setInputCloud(laserCloudCornerLast);
+    }
 
     kdtreePointer = kdtreeSurfLLast;
     kdtreeSurfLLast = kdtreeSurfLast;
     kdtreeSurfLast = kdtreePointer;
-    kdtreeSurfLast->setInputCloud(laserCloudSurfLast);
+    if(!laserCloudSurfLast->empty())
+    {
+      kdtreeSurfLast->setInputCloud(laserCloudSurfLast);
+    }
 
     if (timeLasted > 4.0) {
       newLaserCloudLast = true;
